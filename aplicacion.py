@@ -1,23 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
 import csv
-from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  
+app.secret_key = 'supersecretkey'  # Para sesiones
 
+# Configuración de MySQL (root sin contraseña)
 db_config = {
     'user': 'root',
-    'password': '',  
+    'password': '',  # Sin contraseña
     'host': 'localhost',
     'database': 'practicantes_db'
 }
 
-# Crear directorio para CSVs 
+# Crear directorio para CSVs si no existe
 if not os.path.exists('data'):
     os.makedirs('data')
 
+# Conexión a MySQL
 def get_db_connection():
     return mysql.connector.connect(**db_config)
 
@@ -37,7 +38,7 @@ def export_to_csv(table, filename):
     cursor.close()
     conn.close()
 
-# Creación detablas
+# Crear tablas en MySQL si no existen
 def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -126,15 +127,32 @@ def registrar_practicante():
         
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO practicantes (nombre, programa, fecha_inicio, estado, responsable)
-            VALUES (%s, %s, %s, %s, %s)
-        ''', (nombre, programa, fecha_inicio, estado, responsable))
-        practicante_id = cursor.lastrowid
-        cursor.execute('''
-            INSERT INTO usuarios (nombre_usuario, contrasena, rol) VALUES (%s, %s, %s)
-        ''', (nombre_usuario, contrasena, 'practicante'))
-        conn.commit()
+        
+        # Verificar si el nombre_usuario ya existe
+        cursor.execute("SELECT nombre_usuario FROM usuarios WHERE nombre_usuario = %s", (nombre_usuario,))
+        if cursor.fetchone():
+            cursor.close()
+            conn.close()
+            flash('El nombre de usuario ya está en uso. Por favor, elige otro.')
+            return render_template('registrar_practicante.html')
+        
+        try:
+            cursor.execute('''
+                INSERT INTO practicantes (nombre, programa, fecha_inicio, estado, responsable)
+                VALUES (%s, %s, %s, %s, %s)
+            ''', (nombre, programa, fecha_inicio, estado, responsable))
+            practicante_id = cursor.lastrowid
+            cursor.execute('''
+                INSERT INTO usuarios (nombre_usuario, contrasena, rol) VALUES (%s, %s, %s)
+            ''', (nombre_usuario, contrasena, 'practicante'))
+            conn.commit()
+        except mysql.connector.Error as err:
+            conn.rollback()
+            flash(f'Error al registrar el practicante: {str(err)}')
+            cursor.close()
+            conn.close()
+            return render_template('registrar_practicante.html')
+        
         cursor.close()
         conn.close()
         export_to_csv('practicantes', 'practicantes.csv')
@@ -247,6 +265,7 @@ def ver_avances(practicante_id):
     conn.close()
     return render_template('ver_avances.html', practicante=practicante, avances=avances)
 
+# Iniciar la aplicación
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)

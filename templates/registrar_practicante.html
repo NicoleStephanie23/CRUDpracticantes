@@ -29,6 +29,8 @@
         {% endif %}
         <button type="submit">{{ 'Actualizar' if practicante else 'Registrar' }}</button>
     </form>
-    <a href="{{ url_for('listar_practicantes') }}">Volver al listado</a>
+    <div class="button-group">
+        <a href="{{ url_for('listar_practicantes') }}">Volver al listado</a>
+    </div>
 </body>
 </html>

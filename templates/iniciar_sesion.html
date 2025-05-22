@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Iniciar Sesión</h1>
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(category_filter=["error", "login"]) %}
         {% if messages %}
             <ul>
                 {% for message in messages %}

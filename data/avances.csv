@@ -1,2 +1,6 @@
 id,practicante_id,descripcion,fecha,retroalimentacion
 1,1,prueba,2025-05-21,prueba
+2,4,Prueba1,2025-05-21,Prueba1
+3,4,prueba2,2025-05-20,prueba2
+4,1,prueba3,2025-05-07,Practicante en espera
+5,1,avance1 registrado ,2025-05-21,

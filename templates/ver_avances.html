@@ -5,22 +5,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-    <h1>Avances de {{ practicante[1] }}</h1>
-    <a href="{{ url_for('agregar_avance', practicante_id=practicante[0]) }}">Registrar Nuevo Avance</a>
-    <a href="{{ url_for('listar_practicantes') }}">Volver al listado</a>
-    <table>
-        <tr>
-            <th>Descripción</th>
-            <th>Fecha</th>
-            <th>Retroalimentación</th>
-        </tr>
-        {% for avance in avances %}
-        <tr>
-            <td>{{ avance[2] }}</td>
-            <td>{{ avance[3] }}</td>
-            <td>{{ avance[4] or '' }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="navbar">
+        <!-- Barra de navegación vacía, puede usarse para futuros enlaces -->
+    </div>
+    <div class="container">
+        <div class="card">
+            <h1>Avances de {{ practicante[1] }}</h1>
+            <table>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Retroalimentación</th>
+                </tr>
+                {% for avance in avances %}
+                <tr>
+                    <td>{{ avance[2] }}</td>
+                    <td>{{ avance[3] }}</td>
+                    <td>{{ avance[4] or '' }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="button-group">
+                <a href="{{ url_for('agregar_avance', practicante_id=practicante[0]) }}">Registrar Nuevo Avance</a>
+                <a href="{{ url_for('listar_practicantes') }}">Volver al Listado</a>
+                <a href="{{ url_for('cerrar_sesion') }}">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
