@@ -1,16 +1,16 @@
-/* Importar fuente Roboto desde Google Fonts */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-/* Estilos generales */
+
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #F5F5F5; /* Gris claro */
-    color: #333333; /* Texto gris oscuro */
+    background-color: #F5F5F5; 
+    color: #333333; 
     margin: 0;
     padding: 0;
 }
 
-/* Contenedor principal */
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -19,14 +19,14 @@ body {
 
 /* Barra de navegación */
 .navbar {
-    background-color: #F8B7CC; /* Rosa suave */
+    background-color: #F8B7CC; 
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
 .navbar a {
-    color: #FFFFFF; /* Blanco */
+    color: #FFFFFF;
     text-decoration: none;
     margin-right: 20px;
     font-weight: 500;
@@ -35,12 +35,12 @@ body {
 }
 
 .navbar a:hover {
-    color: #F06292; /* Rosa más intenso */
+    color: #F06292; 
 }
 
 /* Títulos */
 h1 {
-    color: #F06292; /* Rosa intenso */
+    color: #F06292; 
     text-align: center;
     margin-bottom: 20px;
     font-size: 28px;
@@ -49,7 +49,7 @@ h1 {
 
 /* Tarjetas para formularios y tablas */
 .card {
-    background-color: #FFFFFF; /* Blanco */
+    background-color: #FFFFFF; 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -72,7 +72,7 @@ label {
 
 input, select, textarea {
     padding: 10px;
-    border: 1px solid #E0E0E0; /* Gris suave */
+    border: 1px solid #E0E0E0; 
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
@@ -81,7 +81,7 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    border-color: #F06292; /* Rosa intenso */
+    border-color: #F06292; 
     outline: none;
 }
 
@@ -91,8 +91,8 @@ textarea {
 }
 
 button {
-    background-color: #F06292; /* Rosa intenso */
-    color: #FFFFFF; /* Blanco */
+    background-color: #F06292;
+    color: #FFFFFF; 
     padding: 12px 20px;
     border: none;
     border-radius: 5px;
@@ -103,7 +103,7 @@ button {
 }
 
 button:hover {
-    background-color: #D81B60; /* Rosa más oscuro */
+    background-color: #D81B60; 
     transform: translateY(-2px);
 }
 
@@ -120,33 +120,33 @@ table {
 th, td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid #E0E0E0; /* Gris suave */
+    border-bottom: 1px solid #E0E0E0; 
 }
 
 th {
-    background-color: #F8B7CC; /* Rosa suave */
-    color: #FFFFFF; /* Blanco */
+    background-color: #F8B7CC; 
+    color: #FFFFFF; 
     font-weight: 500;
 }
 
 tr:nth-child(even) {
-    background-color: #F9ECEF; /* Rosa muy claro */
+    background-color: #F9ECEF; 
 }
 
 tr:hover {
-    background-color: #F5E1E7; /* Rosa claro para hover */
+    background-color: #F5E1E7; 
 }
 
-/* Enlaces en tablas */
+
 td a {
-    color: #F06292; /* Rosa intenso */
+    color: #F06292; 
     text-decoration: none;
     margin-right: 10px;
     font-weight: 500;
 }
 
 td a:hover {
-    color: #D81B60; /* Rosa más oscuro */
+    color: #D81B60; 
     text-decoration: underline;
 }
 
@@ -159,15 +159,15 @@ ul {
 }
 
 ul li {
-    background-color: #F8B7CC; /* Rosa suave */
-    color: #FFFFFF; /* Blanco */
+    background-color: #F8B7CC; 
+    color: #FFFFFF; 
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
     display: inline-block;
 }
 
-/* Responsividad */
+
 @media (max-width: 768px) {
     .container {
         padding: 10px;
