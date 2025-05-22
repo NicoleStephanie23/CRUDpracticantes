@@ -1,52 +1,192 @@
+/* Importar fuente Roboto desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F5F5F5; /* Gris claro */
+    color: #333333; /* Texto gris oscuro */
+    margin: 0;
+    padding: 0;
 }
-h1 {
-    color: #333;
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
-form {
+
+/* Barra de navegación */
+.navbar {
+    background-color: #F8B7CC; /* Rosa suave */
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
+
+.navbar a {
+    color: #FFFFFF; /* Blanco */
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #F06292; /* Rosa más intenso */
+}
+
+/* Títulos */
+h1 {
+    color: #F06292; /* Rosa intenso */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Tarjetas para formularios y tablas */
+.card {
+    background-color: #FFFFFF; /* Blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: 500;
+    color: #333333;
+}
+
 input, select, textarea {
-    margin: 10px 0;
-    padding: 8px;
-    width: 200px;
+    padding: 10px;
+    border: 1px solid #E0E0E0; /* Gris suave */
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
+
+input:focus, select:focus, textarea:focus {
+    border-color: #F06292; /* Rosa intenso */
+    outline: none;
+}
+
 textarea {
-    width: 300px;
-    height: 100px;
+    resize: vertical;
+    min-height: 100px;
 }
+
 button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #F06292; /* Rosa intenso */
+    color: #FFFFFF; /* Blanco */
+    padding: 12px 20px;
     border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
+
 button:hover {
-    background-color: #0056b3;
+    background-color: #D81B60; /* Rosa más oscuro */
+    transform: translateY(-2px);
 }
+
+/* Tablas */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px 15px;
     text-align: left;
+    border-bottom: 1px solid #E0E0E0; /* Gris suave */
 }
+
 th {
-    background-color: #007bff;
-    color: white;
+    background-color: #F8B7CC; /* Rosa suave */
+    color: #FFFFFF; /* Blanco */
+    font-weight: 500;
 }
-a {
-    margin-right: 10px;
-    color: #007bff;
+
+tr:nth-child(even) {
+    background-color: #F9ECEF; /* Rosa muy claro */
+}
+
+tr:hover {
+    background-color: #F5E1E7; /* Rosa claro para hover */
+}
+
+/* Enlaces en tablas */
+td a {
+    color: #F06292; /* Rosa intenso */
     text-decoration: none;
+    margin-right: 10px;
+    font-weight: 500;
 }
-a:hover {
+
+td a:hover {
+    color: #D81B60; /* Rosa más oscuro */
     text-decoration: underline;
+}
+
+/* Mensajes flash */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    text-align: center;
+}
+
+ul li {
+    background-color: #F8B7CC; /* Rosa suave */
+    color: #FFFFFF; /* Blanco */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar a {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    form {
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
 }
