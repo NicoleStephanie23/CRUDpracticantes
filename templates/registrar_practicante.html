@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ 'Actualizar Practicante' if practicante else 'Registrar Practicante' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>{{ 'Actualizar Practicante' if practicante else 'Registrar Practicante' }}</h1>
+    <form method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" value="{{ practicante[1] if practicante else '' }}" required><br>
+        <label>Programa Académico:</label>
+        <input type="text" name="programa" value="{{ practicante[2] if practicante else '' }}" required><br>
+        <label>Fecha de Ingreso:</label>
+        <input type="date" name="fecha_inicio" value="{{ practicante[3] if practicante else '' }}" required><br>
+        <label>Estado:</label>
+        <select name="estado" required>
+            <option value="activo" {{ 'selected' if practicante and practicante[4] == 'activo' else '' }}>Activo</option>
+            <option value="finalizado" {{ 'selected' if practicante and practicante[4] == 'finalizado' else '' }}>Finalizado</option>
+            <option value="en espera" {{ 'selected' if practicante and practicante[4] == 'en espera' else '' }}>En espera</option>
+        </select><br>
+        <label>Responsable:</label>
+        <input type="text" name="responsable" value="{{ practicante[5] if practicante else '' }}" required><br>
+        {% if not practicante %}
+        <label>Usuario:</label>
+        <input type="text" name="nombre_usuario" required><br>
+        <label>Contraseña:</label>
+        <input type="password" name="contrasena" required><br>
+        {% endif %}
+        <button type="submit">{{ 'Actualizar' if practicante else 'Registrar' }}</button>
+    </form>
+    <a href="{{ url_for('listar_practicantes') }}">Volver al listado</a>
+</body>
+</html>

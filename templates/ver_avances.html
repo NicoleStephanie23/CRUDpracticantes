@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avances de {{ practicante[1] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>Avances de {{ practicante[1] }}</h1>
+    <a href="{{ url_for('agregar_avance', practicante_id=practicante[0]) }}">Registrar Nuevo Avance</a>
+    <a href="{{ url_for('listar_practicantes') }}">Volver al listado</a>
+    <table>
+        <tr>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Retroalimentación</th>
+        </tr>
+        {% for avance in avances %}
+        <tr>
+            <td>{{ avance[2] }}</td>
+            <td>{{ avance[3] }}</td>
+            <td>{{ avance[4] or '' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrar Avance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>Registrar Avance para {{ practicante[1] }}</h1>
+    <form method="POST">
+        <label>Descripción:</label>
+        <textarea name="descripcion" required></textarea><br>
+        <label>Fecha:</label>
+        <input type="date" name="fecha" required><br>
+        {% if session['rol'] == 'supervisor' %}
+        <label>Retroalimentación:</label>
+        <textarea name="retroalimentacion"></textarea><br>
+        {% endif %}
+        <button type="submit">Registrar</button>
+    </form>
+    <a href="{{ url_for('listar_practicantes') }}">Volver al listado</a>
+</body>
+</html>
