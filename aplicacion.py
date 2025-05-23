@@ -4,25 +4,21 @@ import csv
 import os
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # Para sesiones
+app.secret_key = 'supersecretkey'  
 
-# Configuración de MySQL (root sin contraseña)
 db_config = {
     'user': 'root',
-    'password': '',  # Sin contraseña
+    'password': '',  
     'host': 'localhost',
     'database': 'practicantes_db'
 }
 
-# Crear directorio para CSVs si no existe
 if not os.path.exists('data'):
     os.makedirs('data')
 
-# Conexión a MySQL
 def get_db_connection():
     return mysql.connector.connect(**db_config)
 
-# Exportar datos a CSV
 def export_to_csv(table, filename):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -38,7 +34,6 @@ def export_to_csv(table, filename):
     cursor.close()
     conn.close()
 
-# Crear tablas en MySQL si no existen
 def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -70,21 +65,19 @@ def init_db():
             FOREIGN KEY (practicante_id) REFERENCES practicantes(id)
         )
     ''')
-    # Crear usuario admin por defecto
+   
     cursor.execute("INSERT IGNORE INTO usuarios (nombre_usuario, contrasena, rol) VALUES (%s, %s, %s)", 
                    ('admin', 'admin123', 'supervisor'))
     conn.commit()
     cursor.close()
     conn.close()
 
-# Ruta principal
 @app.route('/')
 def inicio():
     if 'nombre_usuario' in session:
         return redirect(url_for('listar_practicantes'))
     return redirect(url_for('iniciar_sesion'))
 
-# Iniciar sesión
 @app.route('/iniciar_sesion', methods=['GET', 'POST'])
 def iniciar_sesion():
     if request.method == 'POST':
@@ -103,14 +96,12 @@ def iniciar_sesion():
         flash('Usuario o contraseña incorrectos')
     return render_template('iniciar_sesion.html')
 
-# Cerrar sesión
 @app.route('/cerrar_sesion')
 def cerrar_sesion():
     session.pop('nombre_usuario', None)
     session.pop('rol', None)
     return redirect(url_for('iniciar_sesion'))
 
-# Registro de practicantes
 @app.route('/registrar_practicante', methods=['GET', 'POST'])
 def registrar_practicante():
     if 'nombre_usuario' not in session or session['rol'] != 'supervisor':
@@ -128,7 +119,6 @@ def registrar_practicante():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Verificar si el nombre_usuario ya existe
         cursor.execute("SELECT nombre_usuario FROM usuarios WHERE nombre_usuario = %s", (nombre_usuario,))
         if cursor.fetchone():
             cursor.close()
@@ -160,7 +150,6 @@ def registrar_practicante():
         return redirect(url_for('listar_practicantes'))
     return render_template('registrar_practicante.html')
 
-# Listado de practicantes
 @app.route('/practicantes')
 def listar_practicantes():
     if 'nombre_usuario' not in session:
@@ -179,7 +168,6 @@ def listar_practicantes():
     conn.close()
     return render_template('listar_practicantes.html', practicantes=practicantes, estado_filtro=estado_filtro)
 
-# Actualizar practicante
 @app.route('/actualizar_practicante/<int:id>', methods=['GET', 'POST'])
 def actualizar_practicante(id):
     if 'nombre_usuario' not in session or session['rol'] != 'supervisor':
@@ -207,7 +195,6 @@ def actualizar_practicante(id):
     conn.close()
     return render_template('registrar_practicante.html', practicante=practicante)
 
-# Eliminar practicante
 @app.route('/eliminar_practicante/<int:id>')
 def eliminar_practicante(id):
     if 'nombre_usuario' not in session or session['rol'] != 'supervisor':
@@ -225,7 +212,6 @@ def eliminar_practicante(id):
     flash('Practicante eliminado exitosamente')
     return redirect(url_for('listar_practicantes'))
 
-# Registro de avances
 @app.route('/agregar_avance/<int:practicante_id>', methods=['GET', 'POST'])
 def agregar_avance(practicante_id):
     if 'nombre_usuario' not in session:
@@ -250,7 +236,6 @@ def agregar_avance(practicante_id):
     conn.close()
     return render_template('agregar_avance.html', practicante=practicante)
 
-# Ver avances
 @app.route('/ver_avances/<int:practicante_id>')
 def ver_avances(practicante_id):
     if 'nombre_usuario' not in session:
@@ -265,7 +250,6 @@ def ver_avances(practicante_id):
     conn.close()
     return render_template('ver_avances.html', practicante=practicante, avances=avances)
 
-# Iniciar la aplicación
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
